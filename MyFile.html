@@ -41,10 +41,14 @@
 <body>
 
     <div>
-        <a href="./Task Manager/index.html">Task Manager</a> |
+        <a href="./JSLearningSession/Task Manager/index.html">Task Manager</a> |
         <h1>All Posts</h1>
         <ul id="postsList" class ="posts-list">
             <!-- Posts will be dynamically inserted here -->
+<!-- 
+        </ul> -->
+
+        <div></div>
 
         <footer>&copy; 2024 My Learning Site. All rights reserved.</footer>
     </div>
@@ -53,56 +57,149 @@
 
 
 <script>
-    const apiURL = 'https://jsonplaceholder.typicode.com/posts';
+    const apiURL1 = 'https://jsonplaceholder.typicode.com/posts';
+    const apiURL = [
+      'https://jsonplaceholder.typicode.com/posts/1',
+      'https://jsonplaceholder.typicode.com/posts/2',
+      'https://jsonplaceholder.typicode.com/posts/3',
+      'https://jsonplaceholder.typicode.com/posts/4',
+      'https://jsonplaceholder.typicode.com/posts/5',
+      'https://jsonplaceholder.typicode.com/posts/6',
+      'https://jsonplaceholder.typicode.com/posts/7',
+      'https://jsonplaceholder.typicode.com/posts/8',
+    ]
+
+
+    Promise.all(apiURL.map(url => fetch(url).then(resp => {
+      if (!resp.ok) {
+        throw new Error('Network response was not ok ' + resp.statusText);
+      }
+      console.log(resp);
+      return resp.json();
+    })))
+    .then(posts => {
+      const postsContainer = document.getElementById('postsList');
+      postsContainer.innerHTML = ''; // Clear existing content
+
+      posts.forEach((post, index) => {
+        setTimeout(() => {
+          const postItem = document.createElement('li');
+          postItem.className = 'post-item';
+
+          const postTitle = document.createElement('h2');
+          postTitle.className = 'post-title';
+          postTitle.textContent = post.userId + '-' + post.id + ' ' + post.title;
+
+          const postBody = document.createElement('p');
+          postBody.className = 'post-body';
+          postBody.textContent = post.body;
+
+          postItem.appendChild(postTitle);
+          postItem.appendChild(postBody);
+
+          postsContainer.appendChild(postItem);
+
+          console.log(`Post ${index + 1}: ${post.title}`);
+        }, index * 1000); // Log each post title with a delay
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching posts:', error);
+      const postsContainer = document.getElementById('postsList');
+      postsContainer.innerHTML = '<li class="post-item">Failed to load posts. Please try again later.</li>';
+    });
     
-    async function fetchAndRenderPost() {
-        try {
-            const response = await fetch(apiURL);
-            console.log(response);
-            if(!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            console.log(response.type);
-            console.log(response.url);
-            console.table(response);
-            const posts = await response.json();
-            console.log(posts);
-            const postsContainer = document.getElementById('postsList');
-            postsContainer.innerHTML = ''; // Clear existing content
+    // async function fetchAndRenderPost() {
+    //     try {
+    //         const response = await fetch(apiURL1);
+    //         console.log(response);
+    //         if(!response.ok) {
+    //             throw new Error('Network response was not ok ' + response.statusText);
+    //         }
+    //         console.log(response.type);
+    //         console.log(response.url);
+    //         console.table(response);
+    //         const posts = await response.json();
+    //         console.log(posts);
+    //         const postsContainer = document.getElementById('postsList');
+    //         postsContainer.innerHTML = ''; // Clear existing content
 
-            posts.forEach(post => {
-                const postItem = document.createElement('li');
-                postItem.className = 'post-item';
+    //         // posts.forEach((post,index) => {
+    //         //     setTimeout(() => {
+    //         //       const postItem = document.createElement('li');
+    //         //       postItem.className = 'post-item';
+
+    //         //       const postTitle = document.createElement('h2');
+    //         //       postTitle.className = 'post-title';
+    //         //       postTitle.textContent = post.userId + '-' + post.id + ' ' + post.title;
+
+    //         //       const postBody = document.createElement('p');
+    //         //       postBody.className = 'post-body';
+    //         //       postBody.textContent = post.body;
+
+    //         //       postItem.appendChild(postTitle);
+    //         //       postItem.appendChild(postBody);
+
+    //         //       postsContainer.appendChild(postItem);
+                  
+    //         //         console.log(`Post ${index + 1}: ${post.title}`);
+    //         //     },  index * 1000); // Log each post title with a delay
+    //         // });
+
+    //         posts.forEach(post => {
+    //             const postItem = document.createElement('li');
+    //             postItem.className = 'post-item';
                 
-                const postTitle = document.createElement('h2');
-                postTitle.className = 'post-title';
-                postTitle.textContent = post.userId + '-' + post.id + ' ' + post.title;
+    //             const postTitle = document.createElement('h2');
+    //             postTitle.className = 'post-title';
+    //             postTitle.textContent = post.userId + '-' + post.id + ' ' + post.title;
                 
-                const postBody = document.createElement('p');
-                postBody.className = 'post-body';
-                postBody.textContent = post.body;
+    //             const postBody = document.createElement('p');
+    //             postBody.className = 'post-body';
+    //             postBody.textContent = post.body;
                 
-                postItem.appendChild(postTitle);
-                postItem.appendChild(postBody);
+    //             postItem.appendChild(postTitle);
+    //             postItem.appendChild(postBody);
                 
-                postsContainer.appendChild(postItem);
-            });
-            // document.getElementById('postsList').innerHTML = posts.map(post => `
-            //     <li class="post-item">
-            //         <h2 class="post-title">${post.title}</h2>
-            //         <p class="post-body">${post.body}</p>
-            //     </li>
-            // `).join('');
+    //             postsContainer.appendChild(postItem);
+    //         });
+    //         // document.getElementById('postsList').innerHTML = posts.map(post => `
+    //         //     <li class="post-item">
+    //         //         <h2 class="post-title">${post.title}</h2>
+    //         //         <p class="post-body">${post.body}</p>
+    //         //     </li>
+    //         // `).join('');
+    //         //  postsContainer.appendChild(postItem);
             
-        } catch (error) {
-            console.error('Error fetching posts:', error);
-            const postsContainer = document.getElementById('postsList');
-            postsContainer.innerHTML = '<li class="post-item">Failed to load posts. Please try again later.</li>';
-        }
-    }
+    //     } catch (error) {
+    //         console.error('Error fetching posts:', error);
+    //         const postsContainer = document.getElementById('postsList');
+    //         postsContainer.innerHTML = '<li class="post-item">Failed to load posts. Please try again later.</li>';
+    //     }
+    // }
 
-    window.onload = fetchAndRenderPost;
+    // window.onload = fetchAndRenderPost;
 
+
+    console.log("a")
+    setTimeout(() => {
+      console.log("b");
+    }, 10000);
+    Promise.resolve().then(() => {
+      console.log("d");
+    });
+    // console.log("c")
+
+    // const box = document.createElement('div');
+    // box.style.width = '100px';
+    // box.style.height = '100px';
+    // box.style.backgroundColor = 'blue';
+    // document.body.appendChild(box);
+
+    // requestAnimationFrame(() => {
+    //   box.style.transform = 'translateX(300px)';
+    //   box.style.transition = 'transform 20s';
+    // });
 
 </script>
 </html>
