@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Which method adds one or more elements to the end of an array and returns the new length?",
+    "choices": [
+      "push()",
+      "append()",
+      "add()",
+      "extend()"
+    ],
+    "answerIndex": 0,
+    "explanation": "`push()` appends element(s) to the end; `unshift()` adds to the front."
+  },
+  {
+    "question": "What does `===` do in JavaScript?",
+    "choices": [
+      "Value equality with coercion",
+      "Reference equality only",
+      "Strict equality (no coercion)",
+      "Compares types only"
+    ],
+    "answerIndex": 2,
+    "explanation": "`===` checks both value and type; no implicit coercion."
+  },
+  {
+    "question": "Which built-in method returns a new array with elements that pass a test?",
+    "choices": [
+      "map()",
+      "filter()",
+      "reduce()",
+      "forEach()"
+    ],
+    "answerIndex": 1,
+    "explanation": "`filter()` returns a new array of elements for which the predicate is true."
+  },
+  {
+    "question": "What is the output of: `console.log(typeof null)`?",
+    "choices": [
+      "\"null\"",
+      "\"object\"",
+      "\"undefined\"",
+      "\"number\""
+    ],
+    "answerIndex": 1,
+    "explanation": "Historical quirk: `typeof null` returns `'object'`."
+  },
+  {
+    "question": "Which keyword declares a block-scoped variable that can be reassigned?",
+    "choices": [
+      "var",
+      "let",
+      "const",
+      "static"
+    ],
+    "answerIndex": 1,
+    "explanation": "`let` is block-scoped and reassignable; `const` is block-scoped but not reassignable."
+  },
+  {
+    "question": "Which method converts a JSON string to a JavaScript object?",
+    "choices": [
+      "JSON.parse()",
+      "JSON.stringify()",
+      "toJSON()",
+      "Object.fromJSON()"
+    ],
+    "answerIndex": 0,
+    "explanation": "`JSON.parse()` parses a JSON string."
+  },
+  {
+    "question": "Which of these is NOT a JavaScript primitive type?",
+    "choices": [
+      "number",
+      "string",
+      "object",
+      "boolean"
+    ],
+    "answerIndex": 2,
+    "explanation": "`object` is not a primitive; others are."
+  },
+  {
+    "question": "How do you create a Promise that resolves after 1 second?",
+    "choices": [
+      "new Promise(r => setTimeout(r, 1000))",
+      "Promise.delay(1000)",
+      "await setTimeout(1000)",
+      "Promise.timeout(1000)"
+    ],
+    "answerIndex": 0,
+    "explanation": "The executor receives `resolve`; `setTimeout(r, 1000)` resolves after 1s."
+  },
+  {
+    "question": "What does `Array.prototype.map()` return?",
+    "choices": [
+      "A new array",
+      "The same array (mutated)",
+      "An iterator",
+      "A number"
+    ],
+    "answerIndex": 0,
+    "explanation": "`map()` returns a new array; it does not mutate the original."
+  },
+  {
+    "question": "Which statement about `const` arrays is true?",
+    "choices": [
+      "You cannot push to a const array",
+      "You cannot reassign the binding, but you can mutate its contents",
+      "It creates an immutable array",
+      "It prevents garbage collection"
+    ],
+    "answerIndex": 1,
+    "explanation": "`const` prevents rebinding; the array\u2019s contents can still change."
+  }
+]
