@@ -4,7 +4,9 @@ import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
 // 👇 now using your barrel re-exports
-import { http, subtract, add, avg } from './utils/index.js'
+import  { http } from './utils/index.js'
+// import add, {  subtract, avg, multiply, divide } from './utils/math.js'
+import * as mymath from './utils/math.js'
 
 const nums = [1, 2, 3, 4, 5,6,7,8,9,10]
 
@@ -45,9 +47,9 @@ setupCounter(document.querySelector('#counter'))
 // 1) Math results rendered into the page
 const mathOut = document.getElementById('math-out')
 mathOut.textContent =
-  `subtract(10, 4) = ${subtract(10, 4)}
-add(10, 4) = ${add(10, 4)}
-avg([${nums.join(', ')}]) = ${avg(nums)}`
+  `subtract(10, 4) = ${mymath.subtract(10, 4)}
+add(10, 4) = ${mymath.default(10, 4)}
+avg([${nums.join(', ')}]) = ${mymath.avg(nums)}`
 
 // 2) HTTP button that fetches and lists posts
 const btn = document.getElementById('load-posts')
