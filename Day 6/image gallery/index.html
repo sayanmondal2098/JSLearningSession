@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="description"
+    content="Responsive image gallery with lazy-loaded thumbnails, modal viewer, keyboard controls, and favorites." />
+  <title>Image Gallery — Lazy Modal + Favorites</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Optional performance hint if you use remote images like picsum -->
+  <!-- <link rel="preconnect" href="https://picsum.photos"> -->
+</head>
+
+<body>
+  <a class="sr" href="#main">Skip to gallery</a>
+
+  <header class="wrap header">
+    <h1>Image Gallery <span class="muted">Lazy Modal + Favorites</span></h1>
+
+    <div class="controls" role="group" aria-label="Gallery filters and actions">
+      <label class="toggle">
+        <input id="onlyFav" type="checkbox" />
+        <span>Show favorites only</span>
+      </label>
+      <button id="clearFav" class="btn ghost" type="button" title="Clear all favorites">Clear favorites</button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <section id="grid" class="grid" aria-live="polite" aria-label="Image thumbnails">
+      <!-- Thumbnails injected by app.js -->
+    </section>
+    <div id="empty" class="empty hidden">No images to display.</div>
+  </main>
+
+  <!-- Clickable overlay behind the dialog -->
+  <div id="overlay" class="overlay hidden" aria-hidden="true"></div>
+
+  <!-- Modal viewer -->
+  <dialog id="viewer" class="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer_title">
+    <div class="viewer-inner">
+      <div class="viewer-top">
+        <h2 id="viewer_title" class="sr">Image viewer</h2>
+        <button id="btnClose" class="icon" type="button" aria-label="Close (Esc)">✕</button>
+      </div>
+
+      <figure class="stage">
+        <img id="full" alt="" />
+        <figcaption id="caption" class="caption"></figcaption>
+      </figure>
+
+      <div class="viewer-actions" role="group" aria-label="Viewer controls">
+        <button id="prev" class="btn" type="button" aria-label="Previous (←)">← Prev</button>
+        <button id="fav" class="btn" type="button" aria-pressed="false" aria-label="Toggle favorite">♡ Favorite</button>
+        <button id="next" class="btn" type="button" aria-label="Next (→)">Next →</button>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="wrap footer">
+    <span class="muted small">Tip: Use ← and → keys to navigate, <kbd>Esc</kbd> to close. Click the heart to save
+      favorites.</span>
+  </footer>
+
+  <noscript>
+    <div class="wrap">
+      <p class="muted">JavaScript is disabled. Thumbnails and the viewer require JavaScript to function.</p>
+    </div>
+  </noscript>
+
+  <script src="app.js" defer></script>
+</body>
+
+</html>
