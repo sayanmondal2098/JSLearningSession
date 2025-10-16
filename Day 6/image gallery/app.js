@@ -1,7 +1,7 @@
 'use strict';                      // Opt into strict mode (safer JS: no accidental globals, etc.)
 
 // Build a small dataset of 20 images from picsum.photos
-const DATA = Array.from({ length: 20 }, (_, i) => {   // Create an array [0..19] and map each to an object
+const DATA = Array.from({ length: 200 }, (_, i) => {   // Create an array [0..19] and map each to an object
   const id = 100 + i;                                 // Use ids 100..119 (picsum has many image IDs)
   return {                                            // One gallery item:
     id: String(id),                                   //   string id (used for favorites)
